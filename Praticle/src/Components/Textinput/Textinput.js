@@ -14,7 +14,7 @@ const Textinput = (props) => {
         keyboardType={props.KeyBoardType}
         style={[defaultStyle]}
         secureTextEntry={props.SecureTextEntry}
-        onChangeText={(text) => this.props.onChangeText(text)}
+        onChangeText={(text) => props.onChangeText(text)}
       />
     </View>
   );

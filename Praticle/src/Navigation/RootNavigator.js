@@ -12,7 +12,7 @@ const RootNavigator = () => {
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Login" component={signin} />
       <Stack.Screen name="Register" component={signup} />
-      <Stack.Screen name="homescreen" component={homescreen} />
+      <Stack.Screen name="c" component={homescreen} />
       <Stack.Screen name="editdetails" component={editdetails} />
     </Stack.Navigator>
   );

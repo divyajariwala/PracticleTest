@@ -4,6 +4,7 @@ import {height} from 'react-native-dimension';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Textinput from '../../Components/Textinput/Textinput';
 import Style from './Style';
+import Button from '../../Components/Button/Button';
 const {container, headingtext, buttonStyle, register} = Style;
 
 export default class EditDetails extends Component {
@@ -47,15 +48,19 @@ export default class EditDetails extends Component {
             style={{
               height: '40%',
               marginTop: height(10),
-            
+
               alignItems: 'center',
               width: '100%',
             }}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={[buttonStyle]}
               onPress={() => this.props.navigation.navigate('Signup')}>
               <Text>Edit</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Button
+              Buttontext="Edit"
+              onclick={() => this.props.navigation.navigate('editdetails')}
+            />
           </View>
         </View>
       </SafeAreaView>

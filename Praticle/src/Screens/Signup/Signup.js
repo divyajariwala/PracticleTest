@@ -4,6 +4,7 @@ import {height} from 'react-native-dimension';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Textinput from '../../Components/Textinput/Textinput';
 import Style from './Style';
+import Button from '../../Components/Button/Button';
 const {container, headingtext, buttonStyle, register} = Style;
 
 export default class Signup extends Component {
@@ -44,11 +45,15 @@ export default class Signup extends Component {
             />
           </View>
           <View style={{height: '40%', marginTop: height(10), width: '100%'}}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={[buttonStyle]}
               onPress={() => this.props.navigation.navigate('Signup')}>
               <Text>Signup</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Button
+              Buttontext="SignUp"
+              onclick={() => this.props.navigation.navigate('homescreen')}
+            />
           </View>
         </View>
       </SafeAreaView>
