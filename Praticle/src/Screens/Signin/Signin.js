@@ -6,6 +6,7 @@ import Textinput from '../../Components/Textinput/Textinput';
 import Style from './Style';
 import Button from '../../Components/Button/Button';
 const {container, headingtext, buttonStyle, register, registerText} = Style;
+import Asyncstorage from '@react-native-community/async-storage';
 export default class Signin extends Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,17 @@ export default class Signin extends Component {
       password: '',
     };
   }
+  verifyLogin = async () => {
+    if (this.state.email === 'Testcase') {
+      await Asyncstorage.setItem('@UserType', '@User1');
+      this.props.navigation.navigate('homescreen');
+    } else if (this.state.email === 'Testcase2') {
+      await Asyncstorage.setItem('@UserType', '@User2');
+      this.props.navigation.navigate('homescreen');
+    } else {
+      alert('Please check your EmailAddress');
+    }
+  };
   render() {
     return (
       <SafeAreaView>
@@ -30,10 +42,10 @@ export default class Signin extends Component {
               onChangeText={(text) => this.setState({email: text})}
             />
             <Textinput
-              value={this.state.email}
+              value={this.state.password}
               KeyBoardType="email-address"
-              Title="Email"
-              onChangeText={(text) => this.setState({email: text})}
+              Title="Password"
+              onChangeText={(text) => this.setState({password: text})}
             />
           </View>
           <View style={{height: '40%', marginTop: height(10), width: '100%'}}>
@@ -44,12 +56,13 @@ export default class Signin extends Component {
             </TouchableOpacity> */}
             <Button
               Buttontext="Login"
-              onclick={() => this.props.navigation.navigate('homescreen')}
+              onclick={() => this.verifyLogin()}
             />
 
             <TouchableOpacity
               style={[register]}
-              onPress={() => this.props.navigation.navigate('Register')}>
+              // onPress={() => }
+              >
               <Text style={[registerText]}>Sign Up</Text>
             </TouchableOpacity>
           </View>

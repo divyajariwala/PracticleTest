@@ -5,6 +5,7 @@ import signin from '../Screens/Signin/Signin';
 import signup from '../Screens/Signup/Signup';
 import homescreen from '../Screens/ContactPage/ContactPage';
 import editdetails from '../Screens/EditDetails/EditDetails';
+import adddetails from '../Screens/AddDetails/AddDetails';
 const Stack = createStackNavigator();
 
 const RootNavigator = () => {
@@ -12,8 +13,9 @@ const RootNavigator = () => {
     <Stack.Navigator headerMode="none">
       <Stack.Screen name="Login" component={signin} />
       <Stack.Screen name="Register" component={signup} />
-      <Stack.Screen name="c" component={homescreen} />
+      <Stack.Screen name="homescreen" component={homescreen} />
       <Stack.Screen name="editdetails" component={editdetails} />
+      <Stack.Screen name="adddetails" component={adddetails} />
     </Stack.Navigator>
   );
 };
