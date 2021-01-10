@@ -15,13 +15,11 @@ export default class AddDetails extends Component {
     super(props);
 
     this.state = {
-      User: [
-        {
-          name: '',
-          email: '',
-          phonenumber: '',
-        },
-      ],
+      User: {
+        name: '',
+        email: '',
+        phonenumber: '',
+      },
     };
   }
   chooseFile = () => {
@@ -66,18 +64,19 @@ export default class AddDetails extends Component {
     console.log('Adddetails', userdata);
     this.props.navigation.navigate('homescreen');
   };
-  // handleOnchnage = (text) => {
-  //   let data = [...this.state.User];
-  //   let data1 = {...data[0], ...data[1]};
-  //   data1.email = text;
-  //   data1.phonenumber = text;
-  //   data[0] = data1;
-  //   data[1] = data1;
-  //   this.setState({User: data});
-  //   console.log(data);
-  // };
+  changeData = (value) => {
+    this.setState({
+      User: {
+        ...this.state.User,
+        ...value,
+      },
+    });
+  };
+
   render() {
-    const {name, email, phonenumber} = this.state.User;
+    const {
+      User: {name, email, phonenumber},
+    } = this.state;
 
     return (
       <SafeAreaView>
@@ -122,31 +121,45 @@ export default class AddDetails extends Component {
               }}
             /> */}
             <Textinput
+              value={name}
+              KeyBoardType="email-address"
+              Title="Email"
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.email = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({name: text})}
+            />
+            <Textinput
               value={email}
               KeyBoardType="email-address"
               Title="Email"
-              onChangeText={(text) => {
-                let data = [...this.state.User];
-                let data1 = {...data[0]};
-                data1.email = text;
-                data[0] = data1;
-                this.setState({User: data});
-                console.log(data);
-              }}
-              // onChangeText={(text) => this.handleOnchnage(text)}
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.email = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({email: text})}
             />
             <Textinput
               value={phonenumber}
               Title="Phone Number"
-              onChangeText={(text) => {
-                let data = [...this.state.User];
-                let data1 = {...data[1]};
-                data1.phonenumber = text;
-                data[1] = data1;
-                this.setState({User: data});
-                console.log(data);
-              }}
-              // onChangeText={(text) => this.handleOnchnage(text)}
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.phonenumber = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({phonenumber: text})}
             />
           </View>
           <View

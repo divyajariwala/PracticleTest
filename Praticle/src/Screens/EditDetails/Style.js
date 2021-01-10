@@ -13,6 +13,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: totalSize(4),
+    marginTop:height(4)
   },
   buttonStyle: {
     width: '50%',

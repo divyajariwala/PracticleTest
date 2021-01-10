@@ -6,6 +6,8 @@ import Textinput from '../../Components/Textinput/Textinput';
 import Style from './Style';
 import Button from '../../Components/Button/Button';
 import ImagePicker from 'react-native-image-picker';
+import Asyncstorage from '@react-native-community/async-storage';
+
 const {container, headingtext, avtar, avtarplaceholder} = Style;
 
 export default class EditDetails extends Component {
@@ -13,11 +15,20 @@ export default class EditDetails extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      confirmPassowrd: '',
-      fileUri: '',
+      usertype: '',
+      User: {
+        name: '',
+        email: '',
+        phonenumber: '',
+      },
     };
+  }
+  async componentDidMount() {
+    this.setState({
+      User: JSON.parse(await Asyncstorage.getItem('@EditUser')),
+    });
+    console.log('Edit data', this.state.User);
+    console.log('Name', this.state.User.name);
   }
 
   chooseFile = () => {
@@ -56,44 +67,106 @@ export default class EditDetails extends Component {
       }
     });
   };
+  changeData = (value) => {
+    this.setState({
+      User: {
+        ...this.state.User,
+        ...value,
+      },
+    });
+  };
+  editDetails = () => {
+    await AsyncStorage.setItem('@MyUser', JSON.stringify(this.state.User));
+    let userdata = await AsyncStorage.getItem('@MyUser');
+    console.log('Adddetails', userdata);
+    this.props.navigation.navigate('homescreen');
+  };
   render() {
+    const {
+      User: {name, email, phonenumber},
+    } = this.state;
     return (
       <SafeAreaView>
         <View style={[container]}>
           <View style={{height: '20%'}}>
-            <Text style={[headingtext]}> EDIT DETAILS</Text>
+            <Text style={[headingtext]}> Edit DETAILS</Text>
           </View>
           <View>
-            <TouchableOpacity
-              style={[avtarplaceholder]}
-              onPress={this.chooseFile.bind(this)}>
-              <Image
-                source={{
-                  uri: this.state.fileUri,
-                }}
-                style={[avtar]}
-              />
-              {/* {this.state.fileuri == null ? (
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                style={[avtarplaceholder]}
+                onPress={this.chooseFile.bind(this)}>
+                <Image
+                  source={{
+                    uri: this.state.fileUri,
+                  }}
+                  style={[avtar]}
+                />
+                {/* {this.state.fileuri == null ? (
                 <Icon name="plus" size={30} color="black" />
               ) : null} */}
-            </TouchableOpacity>
-            <Textinput
-              value={this.state.email}
+              </TouchableOpacity>
+              <Text
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  fontSize: totalSize(2),
+                  marginTop: height(4.5),
+                  marginLeft: height(3),
+                }}>
+                Upload Photo
+              </Text>
+            </View>
+            {/* <Textinput
+              value={name}
               KeyBoardType="email-address"
               Title="Name"
-              onChangeText={(text) => this.setState({email: text})}
-            />
+              onChangeText={(text) => {
+                let data = [...this.state.User];
+                data[2].name = text;c
+                this.setState({data});
+              }}
+            /> */}
             <Textinput
-              value={this.state.password}
+              value={name}
               KeyBoardType="email-address"
               Title="Email"
-              onChangeText={(text) => this.setState({password: text})}
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.email = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({name: text})}
             />
             <Textinput
-              value={this.state.password}
+              value={email}
               KeyBoardType="email-address"
+              Title="Email"
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.email = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({email: text})}
+            />
+            <Textinput
+              value={phonenumber}
               Title="Phone Number"
-              onChangeText={(text) => this.setState({password: text})}
+              // onChangeText={(text) => {
+              //   let data = [...this.state.User];
+              //   let data1 = {...data[0]};
+              //   data1.phonenumber = text;
+              //   data[0] = data1;
+              //   this.setState({User: data});
+              //   console.log(data);
+              // }}
+              onChangeText={(text) => this.changeData({phonenumber: text})}
             />
           </View>
           <View
@@ -109,10 +182,7 @@ export default class EditDetails extends Component {
               onPress={() => this.props.navigation.navigate('Signup')}>
               <Text>Edit</Text>
             </TouchableOpacity> */}
-            <Button
-              Buttontext="Edit"
-              onclick={() => this.props.navigation.navigate('editdetails')}
-            />
+            <Button Buttontext="Edit" onclick={() => this.saveData()} />
           </View>
         </View>
       </SafeAreaView>
