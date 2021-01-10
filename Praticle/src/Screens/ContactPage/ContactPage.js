@@ -46,8 +46,19 @@ export default class ContactPage extends Component {
       usertype: await Asyncstorage.getItem('@UserType'),
       userData: await Asyncstorage.getItem('@MyUser'),
     });
+    // let userdata = await Asyncstorage.getItem('@MyUser');
+
+    // this.setState({
+    //   userData: this.state.userData.push(userdata),
+    // });
+
+    let data = Data.push(JSON.parse(this.state.userData));
+    // : Data1.push(this.state.userData);
+
+    console.log(data);
+    console.log('New value', this.state.userData);
     console.log('Usertype', this.state.usertype);
-    console.log('Userdata',JSON.parse(this.state.userData));
+    // console.log('Userdata', JSON.parse(this.state.userData));
   }
 
   render() {

@@ -17,10 +17,9 @@ export default class AddDetails extends Component {
     this.state = {
       User: [
         {
+          name: '',
           email: '',
           phonenumber: '',
-          name: '',
-          fileUri: '',
         },
       ],
     };
@@ -63,8 +62,20 @@ export default class AddDetails extends Component {
   };
   saveData = async () => {
     await AsyncStorage.setItem('@MyUser', JSON.stringify(this.state.User));
+    let userdata = await AsyncStorage.getItem('@MyUser');
+    console.log('Adddetails', userdata);
     this.props.navigation.navigate('homescreen');
   };
+  // handleOnchnage = (text) => {
+  //   let data = [...this.state.User];
+  //   let data1 = {...data[0], ...data[1]};
+  //   data1.email = text;
+  //   data1.phonenumber = text;
+  //   data[0] = data1;
+  //   data[1] = data1;
+  //   this.setState({User: data});
+  //   console.log(data);
+  // };
   render() {
     const {name, email, phonenumber} = this.state.User;
 
@@ -106,7 +117,7 @@ export default class AddDetails extends Component {
               Title="Name"
               onChangeText={(text) => {
                 let data = [...this.state.User];
-                data[2].name = text;
+                data[2].name = text;c
                 this.setState({data});
               }}
             /> */}
@@ -115,20 +126,27 @@ export default class AddDetails extends Component {
               KeyBoardType="email-address"
               Title="Email"
               onChangeText={(text) => {
-                let data = [ ...this.state.User];
-                data[0].email = text;
-                this.setState({data});
+                let data = [...this.state.User];
+                let data1 = {...data[0]};
+                data1.email = text;
+                data[0] = data1;
+                this.setState({User: data});
+                console.log(data);
               }}
+              // onChangeText={(text) => this.handleOnchnage(text)}
             />
             <Textinput
               value={phonenumber}
-              KeyBoardType="email-address"
               Title="Phone Number"
               onChangeText={(text) => {
                 let data = [...this.state.User];
-                data[1].phonenumber = text;
-                this.setState({data});
+                let data1 = {...data[1]};
+                data1.phonenumber = text;
+                data[1] = data1;
+                this.setState({User: data});
+                console.log(data);
               }}
+              // onChangeText={(text) => this.handleOnchnage(text)}
             />
           </View>
           <View
