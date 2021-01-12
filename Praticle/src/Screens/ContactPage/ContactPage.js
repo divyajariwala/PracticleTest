@@ -38,11 +38,10 @@ export default class ContactPage extends Component {
     // this.setState({
     //   userData: this.state.userData.push(userdata),
     // });
-    {
-      this.state.usertype === '@User1'
-        ? Data.push(JSON.parse(this.state.userData))
-        : Data1.push(JSON.parse(this.state.userData));
-    }
+   
+         Data.push(JSON.parse(this.state.userData))
+       
+ 
 
     // : Data1.push(this.state.userData);
 

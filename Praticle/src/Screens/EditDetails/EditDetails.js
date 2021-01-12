@@ -75,7 +75,7 @@ export default class EditDetails extends Component {
       },
     });
   };
-  editDetails = () => {
+  editDetails = async () => {
     await AsyncStorage.setItem('@MyUser', JSON.stringify(this.state.User));
     let userdata = await AsyncStorage.getItem('@MyUser');
     console.log('Adddetails', userdata);

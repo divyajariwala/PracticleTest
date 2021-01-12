@@ -5,6 +5,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Textinput from '../../Components/Textinput/Textinput';
 import Style from './Style';
 import Button from '../../Components/Button/Button';
+import AsyncStorage from '@react-native-community/async-storage';
 const {container, headingtext, buttonStyle, register} = Style;
 
 export default class Signup extends Component {
@@ -17,6 +18,11 @@ export default class Signup extends Component {
       confirmPassowrd: '',
     };
   }
+  registerUser = async () => {
+    await AsyncStorage.setItem('@Email', this.state.email);
+    await AsyncStorage.setItem('@Password', this.state.password);
+    this.props.navigation.navigate('Login');
+  };
   render() {
     return (
       <SafeAreaView>
@@ -33,27 +39,17 @@ export default class Signup extends Component {
             />
             <Textinput
               value={this.state.password}
-              KeyBoardType="email-address"
               Title="Password"
               onChangeText={(text) => this.setState({password: text})}
             />
             <Textinput
-              value={this.state.password}
-              KeyBoardType="email-address"
+              value={this.state.confirmPassowrd}
               Title="Confirm Password"
-              onChangeText={(text) => this.setState({password: text})}
+              onChangeText={(text) => this.setState({confirmPassowrd: text})}
             />
           </View>
           <View style={{height: '40%', marginTop: height(10), width: '100%'}}>
-            {/* <TouchableOpacity
-              style={[buttonStyle]}
-              onPress={() => this.props.navigation.navigate('Signup')}>
-              <Text>Signup</Text>
-            </TouchableOpacity> */}
-            <Button
-              Buttontext="SignUp"
-              onclick={() => this.props.navigation.navigate('homescreen')}
-            />
+            <Button Buttontext="SignUp" onclick={() => this.registerUser()} />
           </View>
         </View>
       </SafeAreaView>
