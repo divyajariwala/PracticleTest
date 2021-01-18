@@ -38,10 +38,8 @@ export default class ContactPage extends Component {
     // this.setState({
     //   userData: this.state.userData.push(userdata),
     // });
-   
-         Data.push(JSON.parse(this.state.userData))
-       
- 
+
+    Data.push(JSON.parse(this.state.userData));
 
     // : Data1.push(this.state.userData);
 
@@ -87,7 +85,7 @@ export default class ContactPage extends Component {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={this.state.usertype === '@User1' ? Data : Data1}
+          data={Data}
           style={{marginBottom: height(10)}}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}

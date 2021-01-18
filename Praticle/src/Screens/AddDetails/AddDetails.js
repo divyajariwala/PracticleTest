@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {SafeAreaView, Text, View, Image,PermissionsAndroid} from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Image,
+  PermissionsAndroid,
+} from 'react-native';
 import {height, totalSize} from 'react-native-dimension';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Textinput from '../../Components/Textinput/Textinput';
@@ -78,31 +84,41 @@ export default class AddDetails extends Component {
     let isCameraPermitted = await this.requestCameraPermission();
     let isStoragePermitted = await this.requestExternalWritePermission();
     if (isCameraPermitted && isStoragePermitted) {
-      launchCamera(options, (response) => {
-        console.log('Response = ', response);
+      launchCamera(  {
+        mediaType: 'photo',
+        includeBase64: false,
+        maxHeight: 200,
+        maxWidth: 200,
+      }, (response) => {
+        console.log(response);
+      })
+      // launchCamera(options, (response) => {
+      //   console.log('Response = ', response);
 
-        if (response.didCancel) {
-          alert('User cancelled camera picker');
-          return;
-        } else if (response.errorCode == 'camera_unavailable') {
-          alert('Camera not available on device');
-          return;
-        } else if (response.errorCode == 'permission') {
-          alert('Permission not satisfied');
-          return;
-        } else if (response.errorCode == 'others') {
-          alert(response.errorMessage);
-          return;
-        }
-        console.log('base64 -> ', response.base64);
-        console.log('uri -> ', response.uri);
-        console.log('width -> ', response.width);
-        console.log('height -> ', response.height);
-        console.log('fileSize -> ', response.fileSize);
-        console.log('type -> ', response.type);
-        console.log('fileName -> ', response.fileName);
-        setFilePath(response);
-      });
+      //   if (response.didCancel) {
+      //     alert('User cancelled camera picker');
+      //     return;
+      //   } else if (response.errorCode == 'camera_unavailable') {
+      //     alert('Camera not available on device');
+      //     return;
+      //   } else if (response.errorCode == 'permission') {
+      //     alert('Permission not satisfied');
+      //     return;
+      //   } else if (response.errorCode == 'others') {
+      //     alert(response.errorMessage);
+      //     return;
+      //   }
+      //   console.log('base64 -> ', response.base64);
+      //   console.log('uri -> ', response.uri);
+      //   console.log('width -> ', response.width);
+      //   console.log('height -> ', response.height);
+      //   console.log('fileSize -> ', response.fileSize);
+      //   console.log('type -> ', response.type);
+      //   console.log('fileName -> ', response.fileName);
+      //   setFilePath(response);
+      // }).catch((e)=>{
+      //   console.log(e);
+      // });
     }
   };
 

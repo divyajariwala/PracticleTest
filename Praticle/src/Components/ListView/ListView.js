@@ -11,29 +11,16 @@ const ListView = (props) => {
     <TouchableOpacity onPress={() => props.editDetails()}>
       <View style={{flexDirection: 'row'}}>
         <View style={{width: '25%'}}>
-          {props.usertype === '@User1' ? (
-            <Image
-              source={profile}
-              resizeMode="contain"
-              style={{
-                width: width(15),
-                height: height(15),
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: height(2),
-              }}></Image>
-          ) : (
-            <Image
-              source={user}
-              resizeMode="contain"
-              style={{
-                width: width(15),
-                height: height(15),
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginLeft: height(2),
-              }}></Image>
-          )}
+          <Image
+            source={user}
+            resizeMode="contain"
+            style={{
+              width: width(15),
+              height: height(15),
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: height(2),
+            }}></Image>
         </View>
         <View style={{width: '75%', justifyContent: 'center'}}>
           <Text style={[textStyle]}>{props.data.item.name}</Text>
